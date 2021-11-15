@@ -2,6 +2,15 @@
     margin: 0;
     padding: 0;
   }
+  .footer-app{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .app-image{
+    height:120px;
+    width: 600px;
+  }
   a{
       text-decoration: none;
       color: #000;
