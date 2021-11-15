@@ -8,6 +8,7 @@
   <title>Comrademarket.com</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#F2EAE3">
   <meta name="title" content="Buy and sell products Online">
   <meta name="description" content="Visit comrademarket.com to start selling your products now.">
   <meta property="og:title" content="Buy and sell products Online" />
@@ -38,9 +39,42 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="/manifest.json">
+
 </head>
 
 <body oncontextmenu="return false" class="snippet-body">
+  <script>
+ window.addEventListener('load',()=>{
+      registerSW();
+    });
+  
+
+
+    //popup to prompt install
+    let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        deferredPrompt = e;
+    });
+
+    //logic for install buttonInstall
+    const installApp = document.getElementById('installApp');
+
+    installApp.addEventListener('click', async () => {
+        if (deferredPrompt !== null) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                deferredPrompt = null;
+            }
+        }
+    });
+    //logic for install buttonInstall
+
+   
+  </script>
+
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container-fluid">
@@ -210,6 +244,19 @@
       </div>
     </div>
   </div>
+ 
+  <script>
+
+    async function registerSW(){
+      if('serviceWorker' in navigator){
+        try{
+          await navigator.serviceWorker.register('./sw.js');
+        }catch(e){
+          console.log(`SW registration failed`);
+        }
+      }
+    }
+  </script>
   <script type="text/javascript"
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript"></script>
