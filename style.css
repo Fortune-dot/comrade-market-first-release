@@ -8,8 +8,7 @@
     justify-content: center;
   }
   .app-image{
-    height:120px;
-    width: 600px;
+    transform: scale(0.5);
   }
   a{
       text-decoration: none;
